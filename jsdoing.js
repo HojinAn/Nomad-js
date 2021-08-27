@@ -1,11 +1,14 @@
 const h1 = document.querySelector('div.hello:first-child h1');
 
 function handleh1Click() {
-    if (h1.style.color==='blue') {//js는 if문 돌릴때 ===로 같음을 표시 파이썬이랑 다르네
-        h1.style.color = 'tomato';
+    const currntColor = h1.style.color;
+    let newColor;
+    if (currntColor==='blue') {
+        newColor = 'tomato';
     } else {
-        h1.style.color = 'blue';//이렇게 하면 'blue'가 중복이라 별로임
+        newColor = 'blue';
     }
+    h1.style.color = newColor;//중복이 좀 줄긴 했다 하지만 여전히 style을 js에서 편집하는거는 바람직하지 못하다 css로 가져가서 할 수 있도록 해보자
 }
 
 h1.addEventListener('click', handleh1Click);
