@@ -1,11 +1,11 @@
 const h1 = document.querySelector('div.hello:first-child h1');
 
 function handleh1Click() {
-    const clickedClass = 'active';//raw value는 오류나기 쉬움
-   if(h1.className === clickedClass) {//이걸 오타내면 변수는 js가 문제를 알려준다
-    h1.className = '';
-    } else{
-        h1.className = clickedClass;//html의 class가 얘땜에 대체되어버린다 문제 -> html의 class는 변경하지 않을 방법을 찾아야한다
+    const clickedClass = 'active';
+   if(h1.classList.contains(clickedClass)) {
+    h1.classList.remove(clickedClass);
+    } else {
+        h1.classList.add(clickedClass);//classList를 사용함으로써 html에 원래 붙어있던 class='original'은 사라지지 않게 되었다.
     }
 }
 
