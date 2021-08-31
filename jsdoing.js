@@ -8,9 +8,9 @@ const USERNAME_KEY = "username"; //아무튼 string이 2번 이상 나오면 다
 function onLoginSubmit(information) {
   information.preventDefault();
   loginForm.classList.add(HIDDEN_CLASSNAME);
-  const username = loginInput.value;
-  localStorage.setItem(USERNAME_KEY, username);
-  paintGreetings(username);
+  const typedUsername = loginInput.value;
+  localStorage.setItem(USERNAME_KEY, typedUsername);
+  paintGreetings(typedUsername);
 }
 
 loginForm.addEventListener("submit", onLoginSubmit);
