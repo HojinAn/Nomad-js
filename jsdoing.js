@@ -8,7 +8,8 @@ function onLoginSubmit(information) {
   information.preventDefault();
   loginForm.classList.add(HIDDEN_CLASSNAME);
   const username = loginInput.value;
-  greeting.innerText = `Hello ${username}`; //``안에 이렇게 써주면 "Hello "+username이랑 같은 역할을 해준다. 즉, 변수와 string을 결합하고 싶다면 이 2가지 방법을 쓰면 된다. ${variable name}을 쓰려면 ``(백틱) ''따옴표 가 아니다
+  localStorage.setItem("username", username);
+  greeting.innerText = `Hello ${username}`;
   greeting.classList.remove(HIDDEN_CLASSNAME);
 }
 
