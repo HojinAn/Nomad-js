@@ -2,15 +2,29 @@ const loginForm = document.querySelector("#login-form");
 const loginInput = document.querySelector("#login-form input");
 const greeting = document.querySelector("#greeting");
 
-const HIDDEN_CLASSNAME = "hidden"; //관습처럼 쓰는 표기법, string만 포함된 변수는 대문자로 표기하고 저장
+const HIDDEN_CLASSNAME = "hidden";
+const USERNAME_KEY = "username"; //아무튼 string이 2번 이상 나오면 다 변수 처리하는 거!
 
 function onLoginSubmit(information) {
   information.preventDefault();
   loginForm.classList.add(HIDDEN_CLASSNAME);
   const username = loginInput.value;
-  localStorage.setItem("username", username);
+  localStorage.setItem(USERNAME_KEY, username);
+  paintGreetings(username);
+}
+
+loginForm.addEventListener("submit", onLoginSubmit);
+
+const savedUsername = localStorage.getItem(USERNAME_KEY);
+
+function paintGreetings(username) {
   greeting.innerText = `Hello ${username}`;
   greeting.classList.remove(HIDDEN_CLASSNAME);
 }
 
-loginForm.addEventListener("submit", onLoginSubmit);
+if (savedUsername === null) {
+  loginForm.classList.remove(HIDDEN_CLASSNAME);
+  loginForm.addEventListener("submit", onLoginSubmit);
+} else {
+  paintGreetings(savedUsername);
+}
