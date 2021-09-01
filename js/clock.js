@@ -4,4 +4,4 @@ function a() {
   console.log("hello");
 }
 
-setInterval(a, 5000);
+setTimeout(a, 5000);
