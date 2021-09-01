@@ -1,3 +1,7 @@
 const clock = document.querySelector("h2#clock");
 
-clock.innerText = "check id clock";
+function a() {
+  console.log("hello");
+}
+
+setInterval(a, 5000);
