@@ -1,7 +1,8 @@
 const clock = document.querySelector("h2#clock");
 
-function a() {
-  console.log("hello");
+function getClock() {
+  const date = new Date();
+  console.log(`${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`);
 }
 
-setTimeout(a, 5000);
+setInterval(getClock, 1000);
