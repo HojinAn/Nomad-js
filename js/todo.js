@@ -1,11 +1,16 @@
 const toDoForm = document.getElementById("todo-form");
-const toDoInput = toDoForm.querySelector("input"); //document.querySelector("#todo-form input");랑 같다 todo-form은 html에서 form의 id값
+const toDoInput = toDoForm.querySelector("input");
 const toDoList = document.getElementById("todo-list");
+
+function paintToDo(newToDo) {
+  console.log("i will pain", newToDo); //check by consolelog
+}
 
 function handleToDoSubmit(event) {
   event.preventDefault();
   const newToDo = toDoInput.value;
   toDoInput.value = "";
+  paintToDo(newToDo);
 }
 
 toDoForm.addEventListener("submit", handleToDoSubmit);
