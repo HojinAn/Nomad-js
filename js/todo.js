@@ -3,8 +3,11 @@ const toDoInput = toDoForm.querySelector("input");
 const toDoList = document.getElementById("todo-list");
 
 function deleteToDo(event) {
-  //click event정보가 온다
-  console.log(event); //어떤 button이 클릭되었나 단서 얻기 위해 consolo log하고서 path를 봐준다.
+  console.dir(
+    event.target.parentElement.innerText
+  ); /*이렇게 봐주면 어떤 버튼이 클릭되었나 콘솔로 구분 가능 target은 클릭된 HTML element다. parentElement는 클릭된 element button의 부모다.
+  console.log 매개변수로 전달된 값을 출력한다.  요소를 HTML과 같은 트리 구조로 출력한다.
+  console.dir 매개변수로 전달된 객체의 속성을 출력한다. 요소를 JSON과 같은 트리 구조로 출력한다.*/
 }
 
 function paintToDo(newToDo) {
