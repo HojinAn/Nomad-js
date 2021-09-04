@@ -4,7 +4,8 @@ const toDoList = document.getElementById("todo-list");
 
 function handleToDoSubmit(event) {
   event.preventDefault();
-  console.log(toDoInput.value);//console로 확인하기
+  const newToDo = toDoInput.value;
+  toDoInput.value = "";
 }
 
 toDoForm.addEventListener("submit", handleToDoSubmit);
