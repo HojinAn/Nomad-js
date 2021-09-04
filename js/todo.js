@@ -2,12 +2,20 @@ const toDoForm = document.getElementById("todo-form");
 const toDoInput = toDoForm.querySelector("input");
 const toDoList = document.getElementById("todo-list");
 
+function deleteToDo() {
+  console.log("don't know which one is clicked")//여러개의 button이 생겨도 무엇이 클릭됐는지 모른다 아직
+}
+
 function paintToDo(newToDo) {
-  const li = document.createElement("li"); //상수 이름은 potato여도 상관없음 괄호안은 "li"여야함
+  const li = document.createElement("li");
   const span = document.createElement("span");
-  li.appendChild(span); //span을 li 내부에 집어넣었다.
-  span.innerText = newToDo; //span태그 내용을 newToDo로 채웠다.    이렇게 HTML을 만들어 준거다
-  toDoList.appendChild(li);//만들어준 li를 toDolist child로 넣어주
+  span.innerText = newToDo;
+  const button = document.createElement("button");
+  button.innerText = "❌"; //윈도우 기준 이모지 단축키는 '윈도우 + .' 입니다
+  button.addEventListener("click", deleteToDo);
+  li.appendChild(span);
+  li.appendChild(button); //먼저 span을 추가하고 button을 추가했다 button이 span다음에 위치하게 될 것
+  toDoList.appendChild(li); //span, button을 해주고나서야 li를 toDoList에 추가
 }
 
 function handleToDoSubmit(event) {
