@@ -2,15 +2,12 @@ const toDoForm = document.getElementById("todo-form");
 const toDoInput = toDoForm.querySelector("input");
 const toDoList = document.getElementById("todo-list");
 
-const toDos = []; //input한 data들을 loalStorage에 저장하고 싶은데 우선 만들어준 것이 array!
+const TODOS_KEY = "todos";
+
+const toDos = [];
 
 function saveToDos() {
-  // localStorage.setItem("todos", toDos); 하지만 HTML은 array를 저장할 수 없기 때문에 이렇게 해주면 각각의 값들이 array가 아닌(["a","b","c"]) 그냥 text로 저장된다.(a,b,c)
-  localStorage.setItem(
-    "todos",
-    JSON.stringify(toDos)
-  ); /*array의 텍스트 모양 자체를 string으로 저장해버리면 된다! 그걸 해주는 역할이 JSON.stringify 얘가 toDos array의 ["a", "b", "c"] 뭐 이런 형태를 localStorage에 그대로 저장할 수 있도록 해주는 것이다. 
- 즉, JSON.stringify는 어떤 JavaScript 코드던 간에 그걸 string으로 바꿔준다.*/
+  localStorage.setItem(TODOS_KEY, JSON.stringify(toDos));
 }
 
 function deleteToDo(event) {
@@ -34,9 +31,19 @@ function handleToDoSubmit(event) {
   event.preventDefault();
   const newToDo = toDoInput.value;
   toDoInput.value = "";
-  toDos.push(newToDo); //여기 써먹으려고 위에서 array 선언 이걸 local storage에 넣어줄거다 하지만 localstorage는 text만 저장가능하고 array는 불가하다.
+  toDos.push(newToDo);
   paintToDo(newToDo);
   saveToDos();
 }
 
 toDoForm.addEventListener("submit", handleToDoSubmit);
+
+function sayHello(item) {
+  console.log("this is the turn of", item);
+}
+const savedToDos = localStorage.getItem(TODOS_KEY);
+
+if (savedToDos !== null) {
+  const parsedToDos = JSON.parse(savedToDos); //이거 통해서 string으로 쓰여있던 걸 array로 변환해준다. array 각각의 item에 대해 function을 실행할 수 있다. 화면에 뿌려주던가 텍스트를 변형하거나 JS는 이것을 가능하게 해준다.
+  parsedToDos.forEach(sayHello); //foreach는 array 각각의 item에 대해 function을 실행할수 있게 해준다.
+}
