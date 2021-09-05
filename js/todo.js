@@ -18,9 +18,9 @@ function deleteToDo(event) {
 
 function paintToDo(newToDoObj) {
   const li = document.createElement("li");
-  li.id = newToDoObj.id; //나중에 button으로 지울 때 지울 li의 id를 입력해준 text가 속한 object의 id로 설정해놓음으로 나중에 지울 li를 구분해줄 수 있다.
+  li.id = newToDoObj.id;
   const span = document.createElement("span");
-  span.innerText = newToDoObj.text; //newToDo array item의 text만 innerText로 저장해버림으로써 단순 Object 저장이 아닌 각 object의 text만 출력되게 해준다.
+  span.innerText = newToDoObj.text;
   const button = document.createElement("button");
   button.innerText = "❌";
   button.addEventListener("click", deleteToDo);
@@ -38,7 +38,7 @@ function handleToDoSubmit(event) {
     id: Date.now(),
   };
   toDos.push(newToDoObj);
-  paintToDo(newToDoObj); //그냥 object를 저장해서 paintToDo로 출력하면 [object Object] 이렇게 출력이 되어버린다.
+  paintToDo(newToDoObj);
   saveToDos();
 }
 
@@ -51,3 +51,5 @@ if (savedToDos !== null) {
   toDos = parsedToDos;
   parsedToDos.forEach(paintToDo);
 }
+/*array에서 뭔가 지울때는 실제로 array에서 그걸 지우는 게 아니고 지우고 싶은 item을 빼고서 새 array를 만드는 거다. item을 지우는게 아니라 제외시키는 거다. 제외하고서 새 array를 만드는 것 이 때 사용하는 것이 filter 함수  array.filter(true) 일때 array에 남겨두고 array.filter(false)일떄 array에서 제외한다.
+filter 함수 까먹으면 7.7강의 다시 한번 보자*/
