@@ -4,7 +4,7 @@ const toDoList = document.getElementById("todo-list");
 
 const TODOS_KEY = "todos";
 
-const toDos = [];
+let toDos = [];
 
 function saveToDos() {
   localStorage.setItem(TODOS_KEY, JSON.stringify(toDos));
@@ -42,5 +42,6 @@ const savedToDos = localStorage.getItem(TODOS_KEY);
 
 if (savedToDos !== null) {
   const parsedToDos = JSON.parse(savedToDos);
-  parsedToDos.forEach(paintToDo); //이렇게 해주면 localStorage에 저장된 값들을 출력해 줄 수 있다. 하지만 저기 위에서 애초에 toDos를 빈 array로 정의해놔서 새로고침한 후에 값을 넣어주면 초기화돼버리는 문제가 있다.
+  toDos = parsedToDos; //localStorage가 null이 아니면 toDos에 과거 저장된 savedToDos를 저장한다.
+  parsedToDos.forEach(paintToDo);
 }
