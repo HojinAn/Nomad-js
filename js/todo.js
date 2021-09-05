@@ -7,7 +7,7 @@ const TODOS_KEY = "todos";
 let toDos = [];
 
 function saveToDos() {
-  localStorage.setItem(TODOS_KEY, JSON.stringify(toDos));
+  localStorage.setItem(TODOS_KEY, JSON.stringify(toDos)); //이제 localStorage에 저장되는 toDos array는 그냥 text array가 아니라 Object array다.
 }
 
 function deleteToDo(event) {
@@ -31,8 +31,13 @@ function handleToDoSubmit(event) {
   event.preventDefault();
   const newToDo = toDoInput.value;
   toDoInput.value = "";
-  toDos.push(newToDo);
-  paintToDo(newToDo);
+  const newToDoObj = {
+    //toDos array에 그냥 text가 아닌 Object를 저장함으로 id지정등을 해줄 수 있도록 할거다.
+    text: newToDo,
+    id: Date.now(), //랜덤한 id를 생성해주기 위해 그냥 Date.now 함수 활용한 것
+  };
+  toDos.push(newToDoObj);
+  paintToDo(newToDo); //이러면 paintToDo는 text인 newToDo만 갖고 있다.
   saveToDos();
 }
 
@@ -42,6 +47,6 @@ const savedToDos = localStorage.getItem(TODOS_KEY);
 
 if (savedToDos !== null) {
   const parsedToDos = JSON.parse(savedToDos);
-  toDos = parsedToDos; //localStorage가 null이 아니면 toDos에 과거 저장된 savedToDos를 저장한다.
+  toDos = parsedToDos; //중요한 것은 localStorage와 toDos array는 다른 거다. localStorage는 database가 아니다. 단지 toDos array를 복사해두는 곳일 뿐이다. database는 toDos가 database다.
   parsedToDos.forEach(paintToDo);
 }
