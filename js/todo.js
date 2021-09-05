@@ -12,8 +12,9 @@ function saveToDos() {
 
 function deleteToDo(event) {
   const li = event.target.parentElement;
-  console.log(li.id);
   li.remove();
+  toDos = toDos.filter((toDo) => toDo.id !== parseInt(li.id)); //클릭된 li의 id와 다른 toDo의 id를 남긴다. 여기서 toDo는 toDos DB의 요소 중 하나 근데 li.id의 타입이 string이기 때문에 int로 바꿔줘야 한다.
+  saveToDos(); //지우고서의 toDos를 저장해줘야한다.
 }
 
 function paintToDo(newToDoObj) {
@@ -51,5 +52,3 @@ if (savedToDos !== null) {
   toDos = parsedToDos;
   parsedToDos.forEach(paintToDo);
 }
-/*array에서 뭔가 지울때는 실제로 array에서 그걸 지우는 게 아니고 지우고 싶은 item을 빼고서 새 array를 만드는 거다. item을 지우는게 아니라 제외시키는 거다. 제외하고서 새 array를 만드는 것 이 때 사용하는 것이 filter 함수  array.filter(true) 일때 array에 남겨두고 array.filter(false)일떄 array에서 제외한다.
-filter 함수 까먹으면 7.7강의 다시 한번 보자*/
