@@ -7,18 +7,20 @@ const TODOS_KEY = "todos";
 let toDos = [];
 
 function saveToDos() {
-  localStorage.setItem(TODOS_KEY, JSON.stringify(toDos)); //이제 localStorage에 저장되는 toDos array는 그냥 text array가 아니라 Object array다.
+  localStorage.setItem(TODOS_KEY, JSON.stringify(toDos));
 }
 
 function deleteToDo(event) {
   const li = event.target.parentElement;
+  console.log(li.id);
   li.remove();
 }
 
-function paintToDo(newToDo) {
+function paintToDo(newToDoObj) {
   const li = document.createElement("li");
+  li.id = newToDoObj.id; //나중에 button으로 지울 때 지울 li의 id를 입력해준 text가 속한 object의 id로 설정해놓음으로 나중에 지울 li를 구분해줄 수 있다.
   const span = document.createElement("span");
-  span.innerText = newToDo;
+  span.innerText = newToDoObj.text; //newToDo array item의 text만 innerText로 저장해버림으로써 단순 Object 저장이 아닌 각 object의 text만 출력되게 해준다.
   const button = document.createElement("button");
   button.innerText = "❌";
   button.addEventListener("click", deleteToDo);
@@ -32,12 +34,11 @@ function handleToDoSubmit(event) {
   const newToDo = toDoInput.value;
   toDoInput.value = "";
   const newToDoObj = {
-    //toDos array에 그냥 text가 아닌 Object를 저장함으로 id지정등을 해줄 수 있도록 할거다.
     text: newToDo,
-    id: Date.now(), //랜덤한 id를 생성해주기 위해 그냥 Date.now 함수 활용한 것
+    id: Date.now(),
   };
   toDos.push(newToDoObj);
-  paintToDo(newToDo); //이러면 paintToDo는 text인 newToDo만 갖고 있다.
+  paintToDo(newToDoObj); //그냥 object를 저장해서 paintToDo로 출력하면 [object Object] 이렇게 출력이 되어버린다.
   saveToDos();
 }
 
@@ -47,6 +48,6 @@ const savedToDos = localStorage.getItem(TODOS_KEY);
 
 if (savedToDos !== null) {
   const parsedToDos = JSON.parse(savedToDos);
-  toDos = parsedToDos; //중요한 것은 localStorage와 toDos array는 다른 거다. localStorage는 database가 아니다. 단지 toDos array를 복사해두는 곳일 뿐이다. database는 toDos가 database다.
+  toDos = parsedToDos;
   parsedToDos.forEach(paintToDo);
 }
