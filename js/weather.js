@@ -1,4 +1,4 @@
-const API_KEY = "36780319e663e961cb0030d779805837";
+const API_KEY = "";
 
 function onGeoOk(position) {
   const lat = position.coords.latitude; //GeolocationPosition 정보의 위도 좌표값
